@@ -1,7 +1,7 @@
 <?php
 	/*
 
-		Skunk PHP Framework v0.1.1
+		Skunk PHP Framework v0.1.2
 		https://github.com/jmhobbs/Skunk
 		Copyright 2011, John Hobbs
 		Licensed under BSD.
@@ -32,18 +32,22 @@
 			$this->post[$route] = array( 'compiled' => Skunk::compile_route( $route ), 'callback' => $fn );
 		}
 
-		public function run () {
+		public function run ( $uri = null ) {
 
-			if( ! isset( $_REQUEST['uri'] ) ) {
-				$this->HTTP_404();
-			}
-			else {
-				if( isset( $_POST ) ) {
-					$this->match_route( $this->get, rtrim( $_REQUEST['uri'], '/' ) );
+			if( is_null( $uri ) ) {
+				if( ! isset( $_REQUEST['uri'] ) ) {
+					$this->HTTP_404();
 				}
 				else {
-					$this->match_route( $this->post, rtrim( $_REQUEST['uri'], '/' ) );
+					$uri = $_REQUEST['uri'];
 				}
+			}
+
+			if( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
+				$this->match_route( $this->post, rtrim( $uri, '/' ) );
+			}
+			else {
+				$this->match_route( $this->get, rtrim( $uri, '/' ) );
 			}
 
 			$this->send_head();
@@ -111,30 +115,30 @@
 			foreach( $routes as $name => $route ) {
 				if( false != preg_match( $route['compiled'], $uri, $matches ) ) {
 
-					$this->do_hook( 'before' ); 
+					$this->do_hook( 'before' );
 
 					// We can't use call_user_func_array because it doesn't respect call by ref.
 					switch( count( $matches ) ) {
 						case 1:
-							call_user_func( $route['callback'], $this );
+							$route['callback']( $this );
 							break;
 						case 2:
-							call_user_func( $route['callback'], $this, $matches[1] );
+							$route['callback']( $this, $matches[1] );
 							break;
 						case 3:
-							call_user_func( $route['callback'], $this, $matches[1], $matches[2] );
+							$route['callback']( $this, $matches[1], $matches[2] );
 							break;
 						case 4:
-							call_user_func( $route['callback'], $this, $matches[1], $matches[2], $matches[3] );
+							$route['callback']( $this, $matches[1], $matches[2], $matches[3] );
 							break;
 						case 5:
-							call_user_func( $route['callback'], $this, $matches[1], $matches[2], $matches[3], $matches[4] );
+							$route['callback']( $this, $matches[1], $matches[2], $matches[3], $matches[4] );
 							break;
 						case 6:
-							call_user_func( $route['callback'], $this, $matches[1], $matches[2], $matches[3], $matches[4], $matches[5] );
+							$route['callback']( $this, $matches[1], $matches[2], $matches[3], $matches[4], $matches[5] );
 							break;
 						case 7:
-							call_user_func( $route['callback'], $this, $matches[1], $matches[2], $matches[3], $matches[4], $matches[5], $matches[6] );
+							$route['callback']( $this, $matches[1], $matches[2], $matches[3], $matches[4], $matches[5], $matches[6] );
 							break;
 						default:
 							// We can only do so much...

@@ -5,7 +5,7 @@
 		$sink = array();
 
 		$clean = preg_replace( '/[^0-9]/', '', $number );
-		if( '+' != substr( $number, 0, 1 ) and 10 == strlen( $clean ) ) {
+		if( '+' != substr( preg_replace( '/[^0-9\+]/', '', $number ), 0, 1 ) and 10 == strlen( $clean ) ) {
 			$clean = '1' . $clean;
 		}
 		$clean = '+' . $clean;

@@ -65,5 +65,5 @@
 		' )
 	);
 
-	$s->run();
+	$s->run( $_SERVER['PATH_INFO'] );
 
