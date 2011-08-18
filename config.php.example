@@ -1,0 +1,10 @@
+<?php
+
+	return array(
+		'database' => array(
+			'dsn'      => 'mysql:host=localhost;dbname=laundry',
+			'username' => 'laundry',
+			'password' => 'laundry',
+		),
+	);
+

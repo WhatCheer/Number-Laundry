@@ -1,0 +1,14 @@
+RewriteEngine On
+RewriteBase /
+
+<Files .*>
+	Order Deny,Allow
+	Deny From All
+</Files>
+
+RewriteRule ^(?:vendor|model|db|config.php)\b.* api.php?uri=/$0 [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule .* api.php?uri=/$0 [PT,QSA]
