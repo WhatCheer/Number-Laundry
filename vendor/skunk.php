@@ -1,7 +1,7 @@
 <?php
 	/*
 
-		Skunk PHP Framework v0.1.0
+		Skunk PHP Framework v0.1.1
 		https://github.com/jmhobbs/Skunk
 		Copyright 2011, John Hobbs
 		Licensed under BSD.
@@ -116,25 +116,25 @@
 					// We can't use call_user_func_array because it doesn't respect call by ref.
 					switch( count( $matches ) ) {
 						case 1:
-							call_user_func( $route['callback'], &$this );
+							call_user_func( $route['callback'], $this );
 							break;
 						case 2:
-							call_user_func( $route['callback'], &$this, $matches[1] );
+							call_user_func( $route['callback'], $this, $matches[1] );
 							break;
 						case 3:
-							call_user_func( $route['callback'], &$this, $matches[1], $matches[2] );
+							call_user_func( $route['callback'], $this, $matches[1], $matches[2] );
 							break;
 						case 4:
-							call_user_func( $route['callback'], &$this, $matches[1], $matches[2], $matches[3] );
+							call_user_func( $route['callback'], $this, $matches[1], $matches[2], $matches[3] );
 							break;
 						case 5:
-							call_user_func( $route['callback'], &$this, $matches[1], $matches[2], $matches[3], $matches[4] );
+							call_user_func( $route['callback'], $this, $matches[1], $matches[2], $matches[3], $matches[4] );
 							break;
 						case 6:
-							call_user_func( $route['callback'], &$this, $matches[1], $matches[2], $matches[3], $matches[4], $matches[5] );
+							call_user_func( $route['callback'], $this, $matches[1], $matches[2], $matches[3], $matches[4], $matches[5] );
 							break;
 						case 7:
-							call_user_func( $route['callback'], &$this, $matches[1], $matches[2], $matches[3], $matches[4], $matches[5], $matches[6] );
+							call_user_func( $route['callback'], $this, $matches[1], $matches[2], $matches[3], $matches[4], $matches[5], $matches[6] );
 							break;
 						default:
 							// We can only do so much...
@@ -218,8 +218,7 @@
 		// END ROUTING JACKED FROM KOHANA 3.1.2
 		////////////////////////////////////////////////////////////////////////////
 
-		protected $_html = <<<EOF
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+		protected $_html = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 	<head profile="http://purl.org/NET/erdf/profile">
@@ -232,8 +231,7 @@
 		<h1>{{title}}</h1>
 		{{body}}
 	</body>
-</html>
-EOF;
+</html>';
 
 	}
 
