@@ -71,7 +71,7 @@
 			$return = true;
 			if( isset( $this->hooks[$hook] ) ) {
 				foreach( $this->hooks[$hook] as $hook ) {
-					$return = call_user_func( $hook, &$this );
+					$return = call_user_func( $hook, $this );
 					if( ! $return ) { break; }
 				}
 			}
